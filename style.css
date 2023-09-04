@@ -77,11 +77,20 @@ button:hover{
 }
 
 ul li{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     color: var(--primary);
     list-style: none;
     margin: 12px 2rem;
     font-size: 1.5rem;
     padding: 0.4rem 2rem;
+
+}
+.checked{
+    color:var(--marked);
+    /* text-decoration: line-through; */
 }
 
 li::before{
@@ -89,15 +98,17 @@ li::before{
     padding-right: 0.5rem;
 }
 
-li::after{
-    display: flex;
-    align-items: baseline;
-    justify-content: top;
+li.checked::before{
     content:'\2714';
-    padding-right: 0.5rem;
 }
 
-.checked{
-    text-decoration: line-through;
-    color:var(--marked);
+
+span::after{
+    margin-right: 0px;
+    content:"\2716";
+    text-align: right;
+}
+
+span:hover{
+    color: var(--marked);
 }
