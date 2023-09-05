@@ -8,6 +8,10 @@ const inputbox = document.getElementById("inputbox");
 const listitems = document.getElementById("listitems");
 const items = document.querySelectorAll("li");
 const button = document.querySelector("button");
+const backgroundContainer = document.getElementById('container');
+const changeBackgroundButton = document.getElementById('change-background');
+
+
 
 // Adding items in list function
 
@@ -49,6 +53,59 @@ listitems.addEventListener('click', function(e){
     }
 });
 
+// ##Changing Background wall ## 
+
+// Function to set the background image from local storage
+function setBackgroundFromLocalStorage() {
+    const backgroundImage = localStorage.getItem('backgroundImage');
+    if (backgroundImage) {
+        backgroundContainer.style.backgroundImage = `url(${backgroundImage})`;
+        changeBackgroundButton.innerHTML = "Change Wallpaper" ;
+    }
+}
+
+// Function to handle the "Change Wallpaper" button click
+
+function changeBackground() {
+    const currentBackground = backgroundContainer.style.backgroundImage;
+    if (currentBackground && currentBackground !== 'none') {
+        // If there's a background image, remove it
+        backgroundContainer.style.backgroundImage = 'none';
+        localStorage.removeItem('backgroundImage');
+        changeBackgroundButton.innerHTML = "Add wallpaper";
+    } else {
+        // Prompt user to upload an image
+        const imageInput = document.createElement('input');
+        imageInput.type = 'file';
+        imageInput.accept = 'image/*';
+
+        // Listen for file selection
+        imageInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const backgroundImageURL = e.target.result;
+                    backgroundContainer.style.backgroundImage = `url(${backgroundImageURL})`;
+                    localStorage.setItem('backgroundImage', backgroundImageURL);
+                    changeBackgroundButton.innerHTML = "Remove Wallpaper";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Trigger the file input dialog
+        imageInput.click();
+    }
+}
+
+// Add event listener for the "Change Wallpaper" button
+changeBackgroundButton.addEventListener('click', changeBackground);
+
+
+
+
+
 // functions to save data in browser`s memory
 
 function saveData(){
@@ -63,4 +120,6 @@ function getData(){
 
 // Calling retrive data automatically so it can show
 // previously added items
+// Initialize the background from local storage
+setBackgroundFromLocalStorage();
 getData();

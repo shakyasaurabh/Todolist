@@ -1,9 +1,9 @@
 :root{
-    --primary: #694c26;
-    --bg:#f1e7da;
-    --accent:#deb887;
-    --secondary:#f5f5dc;
-    --marked:#8e7e69;
+    --primary: rgb(105, 76, 38);
+    --bg:rgba(241, 231, 218, 0.742);
+    --accent:rgba(222, 184, 135, 0.825);
+    --secondary:rgb(245, 245, 220);
+    --marked:rgb(142, 126, 105);
 }
 
 *{
@@ -13,18 +13,35 @@
     font-family: 'Rubik', sans-serif;
 }
 
+.main{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+} 
+
+#change-background{
+    position:fixed;
+    bottom:2rem;
+    right: 2rem;
+}
+
+
 .container{
     width: 100%;
     min-height: 100vh;
     background-color: var(--bg);
-    padding: 10px;
+    /* padding: 10px; */
 } 
 
 .todolist{
+    position:center ;
     width: 600px;
     max-width: 80vw;
     background-color: var(--accent);
-    margin: 5% auto 0;
+    margin: auto ;
+    margin-top: 4rem;
     padding: 10px;
     border-radius: 10px;
 }
@@ -91,11 +108,16 @@ ul li{
 .checked{
     color:var(--marked);
     /* text-decoration: line-through; */
+    text-shadow:  0px 0px 6cap burlywood ;
 }
 
 li::before{
     content:'\25A2';
     padding-right: 0.5rem;
+}
+
+li:hover{
+    color: black;
 }
 
 li.checked::before{
@@ -104,11 +126,34 @@ li.checked::before{
 
 
 span::after{
+    display: block;
     margin-right: 0px;
     content:"\2716";
-    text-align: right;
+    text-align: center;
+    /* background-color: black; */
+    width: 1.9rem;
+    border-radius: 50%;
 }
 
 span:hover{
     color: var(--marked);
+    display: block;
+    background-color: var(--primary);
+
+    border-radius: 50%;
+}
+
+#change-background{
+    padding: 1% 1% 2% 1%;
+    width: auto;
+    border: solid 2px var(--primary);
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+#change-background:hover{
+    /* color: var(--mark) */
+    background-color: var(--primary);
+    color: var(--secondary);
+
 }
